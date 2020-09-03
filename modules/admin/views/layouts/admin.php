@@ -26,7 +26,7 @@ AppAsset::register($this);
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!--<title>Live Dinner Restaurant - Responsive HTML5 Template</title>   -->
-	<title><?= Html::encode($this->title) ?></title>
+	<title> Админка | <?= Html::encode($this->title) ?></title>
 	<?php $this->registerCsrfMetaTags() ?>
 	<!-- Site Icons -->
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
@@ -64,8 +64,7 @@ AppAsset::register($this);
 							</div>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="contact.html">Контакты</a></li>
-						<li class="nav-item"><a class="nav-link" href="contact.html">Корзина</a></li>
-						<li class="nav-item"><a class="nav-link" href="<?= \yii\helpers\Url::to('/admin')?>">Вход</a></li>
+						<li class="nav-item"><a class="nav-link" href="contact.html">Вход</a></li>
 					</ul>
 				</div>
 			</div>
