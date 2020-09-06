@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use PHPUnit\Framework\MockObject\Builder\Identity;
 
 AppAsset::register($this);
 ?>
@@ -65,7 +66,10 @@ AppAsset::register($this);
 						</li>
 						<li class="nav-item"><a class="nav-link" href="contact.html">Контакты</a></li>
 						<li class="nav-item"><a class="nav-link" href="contact.html">Корзина</a></li>
-						<li class="nav-item"><a class="nav-link" href="<?= \yii\helpers\Url::to('/admin')?>">Вход</a></li>
+						<li class="nav-item"><a class="nav-link" href="<?= \yii\helpers\Url::to('/admin') ?>">Вход</a></li>
+						<?php if (!Yii::$app->user->isGuest) : ?>
+							<li class="nav-item"><a class="nav-link" href="<?= \yii\helpers\Url::to(['/site/logout']) ?>"> <?= Yii::$app->user->identity['username'] ?> (Выход)</a></li>
+						<?php endif; ?>
 					</ul>
 				</div>
 			</div>

@@ -64,7 +64,8 @@ AppAsset::register($this);
 							</div>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="contact.html">Контакты</a></li>
-						<li class="nav-item"><a class="nav-link" href="contact.html">Вход</a></li>
+						<li class="nav-item"><a class="nav-link" href="<?= \yii\helpers\Url::to('/admin')?>">Админка</a></li>
+						<li class="nav-item"><a class="nav-link" href="<?= \yii\helpers\Url::to(['/site/logout']) ?>"> <?= Yii::$app->user->identity['username'] ?> (Выход)</a></li>
 					</ul>
 				</div>
 			</div>
