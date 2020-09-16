@@ -33,6 +33,187 @@ DIRECTORY STRUCTURE
       web/                contains the entry script and Web resources
 
 
+DUMP DATABASE
+------------
+
+-- phpMyAdmin SQL Dump
+-- version 4.9.5deb2
+-- https://www.phpmyadmin.net/
+--
+-- Хост: localhost:3306
+-- Время создания: Сен 16 2020 г., 23:02
+-- Версия сервера: 8.0.21-0ubuntu0.20.04.4
+-- Версия PHP: 7.4.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- База данных: `MyDB`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `category`
+--
+
+CREATE TABLE `category` (
+  `id` int NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(1, 'Пицца'),
+(2, 'Суши'),
+(3, 'Роллы'),
+(4, 'Сеты'),
+(5, 'Закуска');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `food`
+--
+
+CREATE TABLE `food` (
+  `id` int NOT NULL,
+  `id_category` int NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `price` int NOT NULL,
+  `description` text NOT NULL,
+  `img` varchar(255) NOT NULL,
+  `popular` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `food`
+--
+
+INSERT INTO `food` (`id`, `id_category`, `name`, `price`, `description`, `img`, `popular`) VALUES
+(1, 1, 'Карибская', 500, 'Фирменный соус, моцарелла, пеперони, шампиньоны. 40 см.', 'karib.jpg', 1),
+(2, 1, 'Джульетта', 550, 'Фирменный соус, моцарелла, томат,\r\nбекон, корнишоны. 40 см.', 'july.jpg', 0),
+(5, 1, 'Нью-йорк', 530, 'Фирменный соус,\r\nмоцарелла, ветчина, пеперони, шампиньоны. 40 см.', 'newyork.jpg', 0),
+(6, 1, 'Кармен', 600, 'Фирменный соус, моцарелла, пеперони, бекон, томат, шалот, шампиньоны, курица, укроп. 40 см.', 'karmen.jpg', 0),
+(7, 1, 'Филадельфия', 600, 'Фирменный соус, моцарелла, семга, айсберг, томаты. 40 см.', 'filad.jpg', 0),
+(8, 1, 'Маргарита', 550, 'Фирменный соус, моцарелла, говядина, корнишоны, томат, пеперони. 40 см.', 'margar.jpg', 0),
+(9, 2, 'C копченным лососем', 59, 'Копченый лосось. 1 шт.', 'sushlos.jpg', 0),
+(10, 2, 'C чукой', 49, 'Салат чука, нори. 1 шт.', 'sushchuk.jpg', 0),
+(11, 2, 'Острый Тори Унаги', 59, 'Угорь, курица, спайси. 1 шт.', 'sushunag.jpg', 0),
+(12, 2, 'С креветкой', 69, 'Острые суши с креветкой и нори. 1 шт.', 'sushikrev.jpg', 0),
+(13, 3, 'Темпурная Камчатка', 219, 'Окуню жар., лук зеленый, масаго, унаги. 8 шт.', 'rolltemp.jpg', 0),
+(14, 3, 'С авокадо', 79, 'Ролл с нежным авокадо. 8 шт.', 'rollavokado.jpg', 1),
+(15, 3, 'Эби люкс', 119, 'Сыр, креветка, огурец. 8 шт.', 'rollaby.jpg', 0),
+(16, 3, 'Запеченная Филадельфия', 349, 'Сыр, лосось, соус сырный, унаги соус, кунжут. 8 шт.', 'rollzapfil.jpg', 0),
+(17, 3, 'Запеченный штурман', 199, 'Окунь жар., лук,томат, соус чесночный, унаги,кунжут. 8 шт.', 'rollzapshtur.jpg', 1),
+(18, 3, 'Запеченный с беконом\"', 259, 'Сыр,огурец,копченный лосось,бекон,соус сырный. 8 шт.', 'rollzapbek.jpg', 1),
+(19, 3, 'Запеченный с угрем', 249, 'Сыр, огурец, пекинка, угорь, соус сырный, унаги, кунжут. 8 шт.', 'rollzapygr.jpg', 0),
+(20, 3, 'Запеченная Калифорния', 209, 'Масаго, сыр, краб, огурец, соус сырный, унаги, кунжут. 8 шт.', 'rollzapkalifor.jpg', 1),
+(21, 3, 'Хамелеон', 199, 'Масаго, курица, перец, огурец, пекинка. 8 шт.', 'rollhamel.jpg', 0),
+(22, 4, 'Филадельфия Maxi под угрем', 1149, 'Филадельфия,\r\nфиладельфия абсолют,\r\nмини филадельфия,\r\n2 суши сливочная креветка,\r\nфиладельфия масаго,\r\nфиладельфия лайт,\r\nмини ролл сливочный лосось.\r\nВес 1118 гр. 48 шт.', 'setfilmax.jpg', 0),
+(23, 4, 'Большой запеченный', 799, 'Запеченный с окунем,\r\nзапеченный с мидиями,\r\nзапеченный с лососем,\r\n2 суши окунь,\r\n2 суши лосось,\r\n2 суши мидии.\r\nВес 900 гр. 30 шт.', 'setbolzap.jpg', 0),
+(24, 4, 'Харумаки', 799, 'Запеченный с лососем терияки,\r\nсенсей,\r\nфиладельфия классическая,\r\nснек ролл,\r\nролл с лососем,\r\nролл сяке люкс. 48 шт.', 'sethar.jpg', 0),
+(25, 4, 'Темпурный', 699, 'Темпурный лосось,\r\nтемпурная креветка,\r\nимбирный,\r\nтемпурные альпы. 32 шт.', 'settempur.jpg', 0),
+(26, 4, 'Крайз', 699, 'Запеченный с лососем терияки,\r\nсенсей,\r\nсливочный лосось, •калифорния,\r\nаляска. 40 шт.', 'setkrayz.jpg', 1),
+(27, 4, 'Харакири', 1399, 'Калифорния,\r\nсливочный лосось,\r\nбонито,\r\nснек ролл,\r\nспарта,\r\nчикен,\r\nролл с огурцом,\r\nролл с лососем,\r\nролл с авокадо,\r\nсливочный огурец,\r\nсуши лосось,\r\nсуши угорь. 74 шт.', 'setharak.jpg', 0),
+(28, 5, 'Кольца кальмара', 160, 'Аппетитные кольца кальмара. 180 гр.', 'zakkolca.jpg', 0),
+(29, 5, 'Картофель фри', 80, 'Тот самый картофель фри. 150 гр.', 'zakkarfree.jpg', 0),
+(30, 5, 'Картофель по-деревенски', 80, 'Один из лучших, картофель по-деревенски. 150 гр.', 'zakkarpoderev.jpg', 1),
+(31, 5, 'Куриные наггетсы', 150, 'Свежайшие куриные наггетсы. 200 гр.', 'zakkurnag.jpg', 0),
+(32, 5, 'Салат Чука', 110, '(Чука,ореховый соус, лимон)\r\nВес 110гр.', 'zaksalatchuk.jpg', 0),
+(33, 5, 'Чука Унаги', 210, '(Чука,лимон,угорь,ореховый соус,кунжут)\r\nВес 130гр.', 'zakchukunagi.jpg', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `user`
+--
+
+CREATE TABLE `user` (
+  `id` int UNSIGNED NOT NULL,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `authKey` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`, `authKey`) VALUES
+(1, 'admin', '$2y$13$SgWV2nUPfipEUSYNwGgmVOXTYTaeJkDly5WcvyC4j5NIjT5dF79ni', 'ZI3CWV4NxEM3_hBp9BQe2E0PXIMOAIbL');
+
+--
+-- Индексы сохранённых таблиц
+--
+
+--
+-- Индексы таблицы `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `food`
+--
+ALTER TABLE `food`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_category` (`id_category`);
+
+--
+-- Индексы таблицы `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT для таблицы `food`
+--
+ALTER TABLE `food`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT для таблицы `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Ограничения внешнего ключа сохраненных таблиц
+--
+
+--
+-- Ограничения внешнего ключа таблицы `food`
+--
+ALTER TABLE `food`
+  ADD CONSTRAINT `food_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `category` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 REQUIREMENTS
 ------------
