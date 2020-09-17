@@ -25,7 +25,6 @@ AppAsset::register($this);
 	<!-- Mobile Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!--<title>Live Dinner Restaurant - Responsive HTML5 Template</title>   -->
 	<title> Админка | <?= Html::encode($this->title) ?></title>
 	<?php $this->registerCsrfMetaTags() ?>
 	<!-- Site Icons -->
@@ -73,7 +72,7 @@ AppAsset::register($this);
 	</header>
 	<!-- End header -->
 
-	<div class="content-menu" style="padding-top: 6%">
+	<div class="content-menu-admin">
 		<?= $content; ?>
 	</div>
 
