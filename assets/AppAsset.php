@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link http://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
@@ -20,15 +21,15 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/bootstrap.min.css',    
         'css/style.css',
+        'css/bootstrap.min.css',
         'css/responsive.css',
-        'css/custom.css'
+        'css/custom.css',
     ];
     public $js = [
-        'js/jquery-3.2.1.min.js',
-        'js/popper.min.js',
+        'js/main.js',
         'js/bootstrap.min.js',
+        'js/popper.min.js',
         'js/jquery.superslides.min.js',
         'js/images-loded.min.js',
         'js/isotope.min.js',
@@ -39,6 +40,6 @@ class AppAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        //'yii\bootstrap\BootstrapAsset',
     ];
 }

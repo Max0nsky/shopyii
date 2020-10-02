@@ -9,7 +9,10 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use Codeception\Util\Uri;
 use PHPUnit\Framework\MockObject\Builder\Identity;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -48,7 +51,7 @@ AppAsset::register($this);
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
 				<a class="navbar-brand" href="/">
-					<img src="/images/logo.png" alt="" width="80%" />
+					<img src="/images/logo.png" alt="" width="65%" />
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -65,7 +68,7 @@ AppAsset::register($this);
 							</div>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="contact.html">Контакты</a></li>
-						<li class="nav-item"><a class="nav-link" href="contact.html">Корзина</a></li>
+						<li class="nav-item"><a class="nav-link" href="#" onclick="return getCart()">Корзина</a></li>
 						<li class="nav-item"><a class="nav-link" href="<?= \yii\helpers\Url::to('/admin') ?>">Вход</a></li>
 						<?php if (!Yii::$app->user->isGuest) : ?>
 							<li class="nav-item"><a class="nav-link" href="<?= \yii\helpers\Url::to(['/site/logout']) ?>"> <?= Yii::$app->user->identity['username'] ?> (Выход)</a></li>
@@ -77,7 +80,7 @@ AppAsset::register($this);
 	</header>
 	<!-- End header -->
 
-	<div class="content-menu" style="padding-top: 6%">
+	<div class="content-menu">
 		<?= $content; ?>
 	</div>
 
@@ -137,6 +140,17 @@ AppAsset::register($this);
 	<!-- End Footer -->
 
 
+	<?php
+	Modal::begin([
+		'header' => '<h2>Корзина</h2>',
+		'id' => 'cart',
+		'size' => 'modal-lg',
+		'footer' => '<button type="button" class="btn btn-secondary" data-dismiss="modal">Продолжить покупки</button>
+		<button type="button" class="btn btn-primary">Оформить заказ</button>
+		<button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>'
+	]);
+	Modal::end();
+	?>
 
 	<a href="#" id="back-to-top" title="Back to top" style="display: none;"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></a>
 	<?php $this->endBody() ?>

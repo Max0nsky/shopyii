@@ -63,7 +63,7 @@ $this->title = $categories[$_GET['id']]['name'];
         <div class="row">
             <div class="col-lg-12">
                 <div class="heading-title text-center">
-                    <h2><?= $categories[$_GET['id']]['name']?></h2>
+                    <h2><?= $categories[$_GET['id']]['name'] ?></h2>
                     <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>-->
                 </div>
             </div>
@@ -72,18 +72,13 @@ $this->title = $categories[$_GET['id']]['name'];
             <div class="col-3">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <?php foreach ($categories as $category) : ?>
-                        <a href="<?= Url::to(['/category/view', 'id' => $category['id']]) ?>" 
-                           <?php 
-                           if($_GET['id'] == $category['id']) {
-                                echo 'class="nav-link active"';
-                           } else {
-                                echo 'class="nav-link"';
-                           }
-                           ?> 
-                           id="v-pills-profile-tab" 
-                           role="tab" 
-                           aria-controls="v-pills-profile"
-                        >
+                        <a href="<?= Url::to(['/category/view', 'id' => $category['id']]) ?>" <?php
+                                                                                                if ($_GET['id'] == $category['id']) {
+                                                                                                    echo 'class="nav-link active"';
+                                                                                                } else {
+                                                                                                    echo 'class="nav-link"';
+                                                                                                }
+                                                                                                ?> id="v-pills-profile-tab" role="tab" aria-controls="v-pills-profile">
                             <?= $category['name'] ?>
                         </a>
                     <?php endforeach; ?>
@@ -95,13 +90,19 @@ $this->title = $categories[$_GET['id']]['name'];
                     <div class="row">
                         <?php foreach ($food as $product) : ?>
                             <div class="col-lg-4 col-md-6 special-grid dinner">
-                                <div class="gallery-single fix">
-                                    <?= Html::img("@web/images/food/{$product['img']}", ['alt' => $product['name'], 'class' => 'img-fluid']) ?>
-                                    <div class="why-text">
-                                        <h4><?= $product['name'] ?></h4>
-                                        <h5><?= $product['price'] ?>р</h5>
+                                <a href="<?= Url::to(['/food/view', 'id' => $product['id']]) ?>">
+                                    <div class="gallery-single fix">
+                                        <?= Html::img("@web/images/food/{$product['img']}", ['alt' => $product['name'], 'class' => 'img-fluid']) ?>
+                                        <div class="why-text">
+                                            <h4><?= $product['name'] ?></h4>
+                                            <h5><?= $product['price'] ?>р</h5>
+                                        </div>
                                     </div>
+                                </a>
+                                <div class="crt" style="text-align: center;">
+                                    <a href="<?= Url::to(['/cart/add', 'id' => $product['id']]) ?>" data-id="<?= $product['id'] ?>" class="btn btn-default add-to-cart">В корзину</a>
                                 </div>
+
                             </div>
                         <?php endforeach; ?>
                     </div>
