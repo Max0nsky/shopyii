@@ -5,11 +5,14 @@
 
 use app\widgets\Alert;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
+use yii\bootstrap4\Nav;
+use yii\bootstrap4\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use yii\bootstrap\Modal;
+use Codeception\Util\Uri;
+use PHPUnit\Framework\MockObject\Builder\Identity;
+use yii\bootstrap4\Modal;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -17,126 +20,146 @@ AppAsset::register($this);
 
 <!DOCTYPE html>
 <html lang="en">
-<!-- Basic -->
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-	<!-- Mobile Metas -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title> Админка | <?= Html::encode($this->title) ?></title>
-	<?php $this->registerCsrfMetaTags() ?>
-	<!-- Site Icons -->
-	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-
-
-	<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-	<?php $this->head() ?>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+     -->
+     <title> Админка | <?= Html::encode($this->title) ?></title>
+    <?php $this->registerCsrfMetaTags() ?>
+    <?php $this->head() ?>
 </head>
 
 <body>
-	<?php $this->beginBody() ?>
-	<!-- Start header -->
-	<header class="top-navbar">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<div class="container">
-				<a class="navbar-brand" href="/">
-					<img src="images/logo.png" alt="" width="80%" />
-				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbars-rs-food">
-					<ul class="navbar-nav ml-auto">
-						<li class="nav-item active"><a class="nav-link" href="/">Главная</a></li>
-						<li class="nav-item"><a class="nav-link" href="about.html">О нас</a></li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Блог</a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="blog.html">blog</a>
-								<a class="dropdown-item" href="blog-details.html">blog Single</a>
-							</div>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="contact.html">Контакты</a></li>
-						
-						<li class="nav-item"><a class="nav-link" href="<?= \yii\helpers\Url::to('/admin')?>">Админка</a></li>
-						<li class="nav-item"><a class="nav-link" href="<?= \yii\helpers\Url::to(['/site/logout']) ?>"> <?= Yii::$app->user->identity['username'] ?> (Выход)</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</header>
-	<!-- End header -->
+    <?php $this->beginBody() ?>
+    <nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light border-bottom ">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="/images/logo.png" class="logo" alt="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Информация</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="return getCart()">Корзина</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Контакты</a>
+                    </li>
+                </ul>
+                <form action="" class="d-flex">
+                    <input type="search" placeholder="Поиск" class="form-cntrol mr-2">
+                    <button class="btn btn-secondary">Найти</button>
+                </form>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="<?= Url::to('/admin') ?>">Вход</a></li>
+                    <?php if (!Yii::$app->user->isGuest) : ?>
+                        <li class="nav-item"><a class="nav-link" href="<?= Url::to(['/site/logout']) ?>"> <?= Yii::$app->user->identity['username'] ?> (Выход)</a></li>
+                    <?php endif; ?>
+                </ul>
+                
+                <!-- <a class="nav-link login" href="#">[Войти]</a> -->
+            </div>
+        </div>
+    </nav>
 
-	<div class="content-menu-admin">
-		<?= $content; ?>
-	</div>
+    <main>
 
-	<!-- Start Footer -->
-	<footer class="footer-area bg-f">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-6">
-					<h3>About Us</h3>
-					<p>Integer cursus scelerisque ipsum id efficitur. Donec a dui fringilla, gravida lorem ac, semper magna. Aenean rhoncus ac lectus a interdum. Vivamus semper posuere dui.</p>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<h3>Subscribe</h3>
-					<div class="subscribe_form">
-						<form class="subscribe_form">
-							<input name="EMAIL" id="subs-email" class="form_input" placeholder="Email Address..." type="email">
-							<button type="submit" class="submit">SUBSCRIBE</button>
-							<div class="clearfix"></div>
-						</form>
-					</div>
-					<ul class="list-inline f-social">
-						<li class="list-inline-item"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-					</ul>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<h3>Contact information</h3>
-					<p class="lead">Ipsum Street, Lorem Tower, MO, Columbia, 508000</p>
-					<p class="lead"><a href="#">+01 2000 800 9999</a></p>
-					<p><a href="#"> info@admin.com</a></p>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<h3>Opening hours</h3>
-					<p><span class="text-color">Monday: </span>Closed</p>
-					<p><span class="text-color">Tue-Wed :</span> 9:Am - 10PM</p>
-					<p><span class="text-color">Thu-Fri :</span> 9:Am - 10PM</p>
-					<p><span class="text-color">Sat-Sun :</span> 5:PM - 10PM</p>
-				</div>
-			</div>
-		</div>
+        <div class="content-menu container">
+            <?= $content; ?>
+        </div>
 
-		<div class="copyright">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<p class="company-name">All Rights Reserved. &copy; 2018 <a href="#">Live Dinner Restaurant</a> Design By :
-							<a href="https://html.design/">html design</a></p>
-					</div>
-				</div>
-			</div>
-		</div>
+    </main>
 
-	</footer>
-	<!-- End Footer -->
+    <footer class="pt-4 my-md-5 pt-md-5 border-top text-center bg-light">
+        <div class="row">
+            <div class="col-12 col-md">
+                <h5>Категория 1</h5>
+                <ul class="list-unstyled text-small">
+                    <li>
+                        <a href="" class="link-secondary">Ссылка</a>
+                    </li>
+                    <li>
+                        <a href="" class="link-secondary">Ссылка</a>
+                    </li>
+                    <li>
+                        <a href="" class="link-secondary">Ссылка</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Категория 2</h5>
+                <ul class="list-unstyled text-small">
+                    <li>
+                        <a href="" class="link-secondary">Ссылка</a>
+                    </li>
+                    <li>
+                        <a href="" class="link-secondary">Ссылка</a>
+                    </li>
+                    <li>
+                        <a href="" class="link-secondary">Ссылка</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Категория 3</h5>
+                <ul class="list-unstyled text-small">
+                    <li>
+                        <a href="" class="link-secondary">Ссылка</a>
+                    </li>
+                    <li>
+                        <a href="" class="link-secondary">Ссылка</a>
+                    </li>
+                    <li>
+                        <a href="" class="link-secondary">Ссылка</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Категория 4</h5>
+                <ul class="list-unstyled text-small">
+                    <li>
+                        <a href="" class="link-secondary">Ссылка</a>
+                    </li>
+                    <li>
+                        <a href="" class="link-secondary">Ссылка</a>
+                    </li>
+                    <li>
+                        <a href="" class="link-secondary">Ссылка</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 
-	
 
-	<a href="#" id="back-to-top" title="Back to top" style="display: none;"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></a>
-	<?php $this->endBody() ?>
+    <?php
+    Modal::begin([
+        'title' => 'Корзина',
+        'id' => 'cart',
+        'size' => 'modal-lg',
+        'footer' => '<button type="button" class="btn btn-secondary" data-dismiss="modal">Продолжить покупки</button>
+		<a href="' . Url::to(['/cart/view']) . '" class="btn btn-primary">Оформить заказ</a>
+		<button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>'
+    ]);
+    Modal::end();
+    ?>
+
+    <!-- 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js" integrity="sha384-BOsAfwzjNJHrJ8cZidOg56tcQWfp6y72vEJ8xQ9w6Quywb24iOsW913URv1IS4GD" crossorigin="anonymous"></script> 
+    -->
+    <?php $this->endBody() ?>
 </body>
 
 </html>

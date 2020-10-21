@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 ?>
 
@@ -20,11 +21,11 @@ use yii\helpers\Html;
                 <tbody>
                     <?php foreach ($session['cart'] as $id => $item) : ?>
                         <tr>
-                            <td><?= Html::img("@web/images/food/{$item['img']}", ['alt' => $item['name'], 'height' => 50 ]) ?></td>
+                            <td><a href="<?= Url::to(['/food/view', 'id' => $id]) ?>"><?= Html::img("@web/images/food/{$item['img']}", ['alt' => $item['name'], 'height' => 50]) ?></a></td>
                             <td><?= $item['quantity'] ?></td>
                             <td><?= $item['name'] ?></td>
                             <td><?= $item['price'] ?></td>
-                            <td><span data-id="<?= $id ?>" class="glyphicon glyphicon-remove text-danger del-item" aria-hidden="true"></span></td>
+                            <td><span data-id="<?= $id ?>" class="glyphicon glyphicon-remove text-danger del-item" aria-hidden="true">X</span></td>
                         </tr>
                     <?php endforeach; ?>
                     <tr>

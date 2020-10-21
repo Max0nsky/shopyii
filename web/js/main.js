@@ -40,10 +40,11 @@ function clearCart(cart) {
 
 $('.add-to-cart').on('click', function(ob) {
     ob.preventDefault();
-    var id = $(this).data('id');
+    var id = $(this).data('id'),
+        quantity = $('#quantity').val();
     $.ajax({
         url: '/cart/add',
-        data: { id: id },
+        data: { id: id, quantity: quantity },
         type: 'GET',
         success: function(res) {
             if (!res) {

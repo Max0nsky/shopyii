@@ -39,7 +39,7 @@ DUMP BASE
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Время создания: Сен 17 2020 г., 17:13
+-- Время создания: Окт 21 2020 г., 18:41
 -- Версия сервера: 8.0.21-0ubuntu0.20.04.4
 -- Версия PHP: 7.4.3
 
@@ -102,8 +102,6 @@ CREATE TABLE `food` (
 --
 
 INSERT INTO `food` (`id`, `id_category`, `name`, `price`, `description`, `img`, `popular`, `quantity`) VALUES
-(1, 1, 'Карибская', 500, 'Фирменный соус, моцарелла, пеперони, шампиньоны. 40 см.', 'karib.jpg', 1, 0),
-(2, 1, 'Джульетта', 550, 'Фирменный соус, моцарелла, томат,\r\nбекон, корнишоны. 40 см.', 'july.jpg', 0, 0),
 (5, 1, 'Нью-йорк', 530, 'Фирменный соус,\r\nмоцарелла, ветчина, пеперони, шампиньоны. 40 см.', 'newyork.jpg', 1, 0),
 (6, 1, 'Кармен', 600, 'Фирменный соус, моцарелла, пеперони, бекон, томат, шалот, шампиньоны, курица, укроп. 40 см.', 'karmen.jpg', 0, 0),
 (7, 1, 'Филадельфия', 600, 'Фирменный соус, моцарелла, семга, айсберг, томаты. 40 см.', 'filad.jpg', 0, 0),
@@ -137,6 +135,66 @@ INSERT INTO `food` (`id`, `id_category`, `name`, `price`, `description`, `img`, 
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `purchase`
+--
+
+CREATE TABLE `purchase` (
+  `id` int NOT NULL,
+  `firstname` varchar(100) NOT NULL,
+  `lastname` varchar(100) NOT NULL,
+  `patronymic` varchar(100) NOT NULL,
+  `final_sum` int NOT NULL,
+  `final_quantity` int NOT NULL,
+  `phone_number` int NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `persons` int NOT NULL,
+  `date` date NOT NULL,
+  `condition_order` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `purchase`
+--
+
+INSERT INTO `purchase` (`id`, `firstname`, `lastname`, `patronymic`, `final_sum`, `final_quantity`, `phone_number`, `address`, `persons`, `date`, `condition_order`) VALUES
+(1, 'Иванов', 'Иван', 'Иванович', 580, 2, 1234567890, 'Воронеж, ул Пушкина, д 50', 2, '2020-10-13', 'В обработке'),
+(2, '123', '123', '123', 609, 2, 123, '123', 123, '2020-10-20', 'В ожидании'),
+(3, '333', '333', '333', 2498, 5, 333333, '3333', 3, '2020-10-20', 'В ожидании'),
+(4, '111', '222', '333', 2498, 5, 444, '555', 666, '2020-10-20', 'В ожидании');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `purchase_item`
+--
+
+CREATE TABLE `purchase_item` (
+  `id` int NOT NULL,
+  `purchase_id` int NOT NULL,
+  `food_id` int NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `price` int NOT NULL,
+  `quantity` int NOT NULL,
+  `sum` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `purchase_item`
+--
+
+INSERT INTO `purchase_item` (`id`, `purchase_id`, `food_id`, `name`, `price`, `quantity`, `sum`) VALUES
+(1, 1, 5, 'Нью-Йорк', 500, 1, 500),
+(2, 1, 29, 'Картофель фри', 80, 1, 80),
+(3, 3, 5, 'Нью-йорк', 530, 3, 1590),
+(4, 3, 26, 'Крайз', 699, 1, 699),
+(5, 3, 20, 'Запеченная Калифорния', 209, 1, 209),
+(6, 4, 5, 'Нью-йорк', 530, 3, 1590),
+(7, 4, 26, 'Крайз', 699, 1, 699),
+(8, 4, 20, 'Запеченная Калифорния', 209, 1, 209);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `user`
 --
 
@@ -152,7 +210,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `authKey`) VALUES
-(1, 'admin', '$2y$13$SgWV2nUPfipEUSYNwGgmVOXTYTaeJkDly5WcvyC4j5NIjT5dF79ni', 'lJF-W9xpQoXZojxlCpawLDFzt2DGXv3O');
+(1, 'admin', '$2y$13$SgWV2nUPfipEUSYNwGgmVOXTYTaeJkDly5WcvyC4j5NIjT5dF79ni', 'KVE0xugc0KcpqEKthJaWlIXb76wHxH7h');
 
 --
 -- Индексы сохранённых таблиц
@@ -170,6 +228,20 @@ ALTER TABLE `category`
 ALTER TABLE `food`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_category` (`id_category`);
+
+--
+-- Индексы таблицы `purchase`
+--
+ALTER TABLE `purchase`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `purchase_item`
+--
+ALTER TABLE `purchase_item`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `purchase_id` (`purchase_id`),
+  ADD KEY `food_id` (`food_id`);
 
 --
 -- Индексы таблицы `user`
@@ -191,7 +263,19 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT для таблицы `food`
 --
 ALTER TABLE `food`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
+-- AUTO_INCREMENT для таблицы `purchase`
+--
+ALTER TABLE `purchase`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT для таблицы `purchase_item`
+--
+ALTER TABLE `purchase_item`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `user`
@@ -208,6 +292,13 @@ ALTER TABLE `user`
 --
 ALTER TABLE `food`
   ADD CONSTRAINT `food_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `category` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `purchase_item`
+--
+ALTER TABLE `purchase_item`
+  ADD CONSTRAINT `purchase_item_ibfk_1` FOREIGN KEY (`purchase_id`) REFERENCES `purchase` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `purchase_item_ibfk_2` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
