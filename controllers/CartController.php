@@ -23,6 +23,14 @@ class CartController extends AppController
         if (empty($food)) {
             return false;
         }
+        if(isset($_SESSION['cart'][$food->id]['quantity']))
+        {
+            if ($quantity + $_SESSION['cart'][$food->id]['quantity'] > $food->quantity)
+            {
+                echo "<script>alert(\"Извините, у нас нет необходимого количества данного товара :( \");</script>";
+                $quantity = 0; 
+            }
+        }
         $session = Yii::$app->session;
         $session->open();
         $cart = new Cart();
@@ -87,7 +95,7 @@ class CartController extends AppController
         if ($purchase->load(Yii::$app->request->post())) {
             $purchase->final_quantity = $session['cart.quantity'];
             $purchase->final_sum = $session['cart.sum'];
-            $purchase->condition_order = "В ожидании";
+            $purchase->condition_order = "Ожидание";
             $purchase->date = date("Y-m-d H:i:s");
             if ($purchase->save()) {
                 $this->savePurchaseItem($session['cart'], $purchase->id);

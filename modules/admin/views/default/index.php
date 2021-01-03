@@ -9,4 +9,7 @@ $this->title = 'Меню';
     <p>
         <a href="<?= Url::to(['manage/index']);?>"> - Управление продукцией</a><br>
     </p>
+    <p>
+        <a href="<?= Url::to(['purchase/index']);?>"> - Управление заказами</a><br>
+    </p>
 </div>

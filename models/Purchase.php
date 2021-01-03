@@ -34,7 +34,6 @@ class Purchase extends ActiveRecord
         return 'purchase';
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -42,7 +41,8 @@ class Purchase extends ActiveRecord
     {
         return [
             [['firstname', 'lastname', 'patronymic', 'phone_number', 'address', 'persons'], 'required'],
-            [['phone_number', 'persons'], 'integer'],
+            [['phone_number'], 'integer'],
+            [['persons'], 'integer', 'min' => 1, 'max' => 10],
             [['firstname', 'lastname', 'patronymic'], 'string', 'max' => 100],
             [['address'], 'string', 'max' => 255],
         ];
@@ -54,17 +54,12 @@ class Purchase extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            //'id' => 'ID',
             'firstname' => 'Имя',
             'lastname' => 'Фамилия',
             'patronymic' => 'Отчество',
-            //'final_sum' => 'Финальная сумма',
-            //'final_quantity' => 'Финальное количество',
             'phone_number' => 'Номер телефона',
             'address' => 'Адрес',
             'persons' => 'Количество персон',
-            //'date' => 'Дата',
-            //'condition_order' => 'Состояние заказа',
         ];
     }
 

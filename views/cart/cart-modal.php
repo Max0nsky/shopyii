@@ -25,7 +25,7 @@ use yii\helpers\Url;
                             <td><?= $item['quantity'] ?></td>
                             <td><?= $item['name'] ?></td>
                             <td><?= $item['price'] ?></td>
-                            <td><span data-id="<?= $id ?>" class="glyphicon glyphicon-remove text-danger del-item" aria-hidden="true">X</span></td>
+                            <td><span data-id="<?= $id ?>" class="glyphicon glyphicon-remove text-danger del-item" aria-hidden="true"><b>X</b></span></td>
                         </tr>
                     <?php endforeach; ?>
                     <tr>

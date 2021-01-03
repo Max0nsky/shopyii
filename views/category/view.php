@@ -35,13 +35,16 @@ $this->title = $categories[$_GET['id']]['name'];
                 <h5><b>Категория</b></h5>
             </div>
             <ul class="nav nav-pills flex-sm-column">
+                <li class="nav-item">
+                    <a class="nav-link menu" aria-current="page" href="<?= Url::to(['/']) ?>">Популярное</a>
+                </li>
                 <?php foreach ($categories as $category) : ?>
                     <li class="nav-item">
                         <a <?php
                             if ($_GET['id'] == $category['id']) {
-                                echo 'class="nav-link menu btn-secondary"';
+                                echo 'class="nav-link menu btn-secondary';
                             } else {
-                                echo 'class="nav-link menu"';
+                                echo 'class="nav-link menu';
                             }
                             ?> aria-current="page" href="<?= Url::to(['/category/view', 'id' => $category['id']]) ?>"><?= $category['name'] ?></a>
                     </li>
@@ -55,7 +58,7 @@ $this->title = $categories[$_GET['id']]['name'];
 
                         <?php foreach ($food as $product) : ?>
                             <div class="col-lg-4 col-md-6 special-grid drinks">
-                                <div class="card" style="width: 18rem;">
+                                <div class="card">
                                     <a href="<?= Url::to(['/food/view', 'id' => $product['id']]) ?>">
                                         <?= Html::img("@web/images/food/{$product['img']}", ['alt' => $product['name'], 'class' => 'card-img-top']) ?>
                                     </a>
