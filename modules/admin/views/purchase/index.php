@@ -10,8 +10,21 @@ use yii\widgets\ActiveForm;
 $this->title = 'Заказы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="purchase-index">
 <br>
+<div class="purchase-index">
+<?php if (Yii::$app->session->hasFlash('success')) : ?>
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <?php echo Yii::$app->session->getFlash('success'); ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (Yii::$app->session->hasFlash('error')) : ?>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <?php echo Yii::$app->session->getFlash('error'); ?>
+        </div>
+    <?php endif; ?>
 <h1>Заказы</h1>
     <table class="table table-bordered table-hover">
         <thead>

@@ -30,8 +30,13 @@ class PurchaseController extends Controller
             //Уменьшаем количество каждого продукта из заказа
             foreach($items as $item) {
                 $food = Food::findOne($item->food_id);
-                $food->quantity -= ($item->quantity);
-                $food->save();
+                if ($food->quantity >= $item->quantity) {
+                    $food->quantity -= ($item->quantity);
+                    $food->save(false);
+                    Yii::$app->session->setFlash('success', 'Со склада: ' . $food->name);
+                } else {
+                    Yii::$app->session->setFlash('error', 'Не хватает на складе: ' . $food->name);
+                }
             }
 
             //Изменяем статус заказа на "Выполнено"

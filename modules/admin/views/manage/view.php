@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="food-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
+    <?= Html::img("@web/images/food/{$model->img}", ['alt' => $model->name, 'class' => 'img-rounded pull-xs-left image-view']) ?>
     <p>
         <?= Html::a('К списку', ['index'], ['class' => 'btn btn-info']) ?>
         <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

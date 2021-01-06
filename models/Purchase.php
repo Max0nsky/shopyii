@@ -41,7 +41,7 @@ class Purchase extends ActiveRecord
     {
         return [
             [['firstname', 'lastname', 'patronymic', 'phone_number', 'address', 'persons'], 'required'],
-            [['phone_number'], 'integer'],
+            [['phone_number'], 'integer', 'max' => 99999999999],
             [['persons'], 'integer', 'min' => 1, 'max' => 10],
             [['firstname', 'lastname', 'patronymic'], 'string', 'max' => 100],
             [['address'], 'string', 'max' => 255],

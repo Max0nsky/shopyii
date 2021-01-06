@@ -3,6 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
+use yii\web\UploadedFile;
 use app\models\Food;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -66,7 +67,12 @@ class ManageController extends Controller
     {
         $model = new Food();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            $model->img = $model->imageFile->baseName . '.' . $model->imageFile->extension;
+            $model->upload();
+            $model->imageFile = null;
+            $model->save(false);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -86,7 +92,12 @@ class ManageController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            $model->img = $model->imageFile->baseName . '.' . $model->imageFile->extension;
+            $model->upload();
+            $model->imageFile = null;
+            $model->save(false);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -104,8 +115,9 @@ class ManageController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        unlink('images/food/' . $model->img);
+        $model->delete();
         return $this->redirect(['index']);
     }
 

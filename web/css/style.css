@@ -42,3 +42,7 @@
     .del-item {
         cursor: pointer;
     }
+    
+    .image-view {
+        height: 220px;
+    }
