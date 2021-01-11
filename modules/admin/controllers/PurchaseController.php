@@ -21,28 +21,24 @@ class PurchaseController extends Controller
     public function actionIndex()
     {
         $purchases = Purchase::find()->with('purchaseItem')->orderBy('condition_order DESC')->all();
-        
-        $purchase_id = Yii::$app->request->get('id');
-        if (!empty($purchase_id)) {
-            //Получаем id и quantity продуктов для уменьшения количества на складе
-            $items = PurchaseItem::find()->where(['purchase_id' => $purchase_id])->all();
-
-            //Уменьшаем количество каждого продукта из заказа
-            foreach($items as $item) {
-                $food = Food::findOne($item->food_id);
-                if ($food->quantity >= $item->quantity) {
-                    $food->quantity -= ($item->quantity);
-                    $food->save(false);
-                    Yii::$app->session->setFlash('success', 'Со склада: ' . $food->name);
-                } else {
-                    Yii::$app->session->setFlash('error', 'Не хватает на складе: ' . $food->name);
-                }
-            }
-
-            //Изменяем статус заказа на "Выполнено"
-            Purchase::updateAll(['condition_order' => 'Выполнено'], ['like', 'id', $purchase_id]);
-            return $this->redirect('/admin/purchase/index');
-        }
         return $this->render('index', ['purchases' => $purchases]);
+    }
+    /**
+     * Выполнить заказ по переданному id
+     */
+    public function actionExecute($purchase_id)
+    {
+        Purchase::executePurchase($purchase_id);
+        return $this->redirect('/admin/purchase/index');
+    }
+
+    /**
+     * Удалить заказ по переданному id
+     */
+    public function actionDelete($purchase_id)
+    {
+        $purchase = Purchase::findOne($purchase_id);
+        $purchase->delete();
+        return $this->redirect('/admin/purchase/index');
     }
 }

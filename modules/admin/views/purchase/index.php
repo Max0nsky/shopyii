@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <br>
 <div class="purchase-index">
-<?php if (Yii::$app->session->hasFlash('success')) : ?>
+    <?php if (Yii::$app->session->hasFlash('success')) : ?>
         <div class="alert alert-success alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <?php echo Yii::$app->session->getFlash('success'); ?>
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php echo Yii::$app->session->getFlash('error'); ?>
         </div>
     <?php endif; ?>
-<h1>Заказы</h1>
+    <h1>Заказы</h1>
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
@@ -56,16 +56,26 @@ $this->params['breadcrumbs'][] = $this->title;
                                 . $item->quantity . "шт ] <br>";
                         ?>
                     </td>
-                    <form action="/admin/purchase/index" method="GET">
-                        <input type="hidden" value="<?= $purchase->id ?>" name="id"/>
-                        <td>
-                            <?php if ($purchase->condition_order == 'Выполнено') {
-                                echo $purchase->condition_order;
-                            } else {
-                                echo Html::submitButton('Ожидание', ['class' => 'btn btn-link']);
-                            }
-                            ?>
-                        </td>
+                    <td>
+                        <?php if ($purchase->condition_order == 'Выполнено') : ?>
+                            <?= $purchase->condition_order; ?>
+                        <?php else : ?>
+                            <p><?= Html::a('Выполнить', ['execute', 'purchase_id' => $purchase->id], [
+                                    'class' => 'btn btn-outline-success',
+                                    'data' => [
+                                        'confirm' => 'Выполнить заказ?',
+                                        'method' => 'post',
+                                    ],
+                                ]); ?></p>
+                            <p><?= Html::a('Удалить', ['delete', 'purchase_id' => $purchase->id], [
+                                    'class' => 'btn btn-outline-danger',
+                                    'data' => [
+                                        'confirm' => 'Удалить заказ?',
+                                        'method' => 'post',
+                                    ],
+                                ]); ?></p>
+                        <?php endif; ?>
+                    </td>
                     </form>
                 </tr>
             <?php endforeach; ?>

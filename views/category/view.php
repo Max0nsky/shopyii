@@ -2,6 +2,7 @@
 
 use yii\helpers\Url;
 use yii\bootstrap4\Html;
+use yii\bootstrap4\LinkPager;
 /* @var $this yii\web\View */
 
 $this->title = $categories[$_GET['id']]['name'];
@@ -70,10 +71,12 @@ $this->title = $categories[$_GET['id']]['name'];
                                 </div>
                             </div>
                         <?php endforeach; ?>
-
                     </div>
                 </div>
             </div>
+            <?= LinkPager::widget([
+                'pagination' => $pages,
+            ]); ?>
         </div>
     </div>
 </div>

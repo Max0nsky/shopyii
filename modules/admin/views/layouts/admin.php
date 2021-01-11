@@ -58,10 +58,6 @@ AppAsset::register($this);
                         <a class="nav-link" href="#">Контакты</a>
                     </li>
                 </ul>
-                <form action="" class="d-flex">
-                    <input type="search" placeholder="Поиск" class="form-cntrol mr-2">
-                    <button class="btn btn-secondary">Найти</button>
-                </form>
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="<?= Url::to('/admin') ?>">Вход</a></li>
                     <?php if (!Yii::$app->user->isGuest) : ?>

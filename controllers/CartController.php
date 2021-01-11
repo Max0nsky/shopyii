@@ -23,9 +23,15 @@ class CartController extends AppController
         if (empty($food)) {
             return false;
         }
-        if(isset($_SESSION['cart'][$food->id]['quantity']))
+        if($quantity > $food->quantity) {
+            // Исправить логику
+            echo "<script>alert(\"Извините, у нас нет необходимого количества данного товара :( \");</script>";
+            $quantity = 0; 
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        elseif(isset($_SESSION['cart'][$food->id]['quantity']))
         {
-            if ($quantity + $_SESSION['cart'][$food->id]['quantity'] > $food->quantity)
+            if (($quantity + $_SESSION['cart'][$food->id]['quantity']) > $food->quantity)
             {
                 echo "<script>alert(\"Извините, у нас нет необходимого количества данного товара :( \");</script>";
                 $quantity = 0; 

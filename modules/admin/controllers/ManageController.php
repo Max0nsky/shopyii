@@ -128,9 +128,9 @@ class ManageController extends Controller
      * @return Food загруженная модель
      * @throws NotFoundHttpException если модель не может быть найдена
      */
-    protected function findModel($id)
+    protected function findModel($purchase_id)
     {
-        if (($model = Food::findOne($id)) !== null) {
+        if (($model = Food::findOne($purchase_id)) !== null) {
             return $model;
         }
 

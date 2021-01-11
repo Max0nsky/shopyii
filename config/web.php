@@ -69,6 +69,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'search' => 'category/search'
             ],
         ],
         

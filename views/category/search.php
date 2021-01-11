@@ -2,10 +2,9 @@
 
 use yii\helpers\Url;
 use yii\bootstrap4\Html;
-use yii\bootstrap4\LinkPager;
 /* @var $this yii\web\View */
 
-$this->title = 'Популярные товары';
+$this->title = "Поиск: " . $queryWord;
 ?>
 
 <div id="carouselControls" class="carousel slide" data-ride="carousel">
@@ -37,7 +36,7 @@ $this->title = 'Популярные товары';
             </div>
             <ul class="nav nav-pills flex-sm-column">
                 <li class="nav-item">
-                    <a class="nav-link menu btn-secondary" aria-current="page" href="<?= Url::to(['/']) ?>">Популярное</a>
+                    <a class="nav-link menu" aria-current="page" href="<?= Url::to(['/']) ?>">Популярное</a>
                 </li>
                 <?php foreach ($categories as $category) : ?>
                     <li class="nav-item">
@@ -47,12 +46,13 @@ $this->title = 'Популярные товары';
             </ul>
         </div>
         <div class="col-md-9">
+            <h2><b>Поисковой запрос:</b> <?= $queryWord ?></h2>
             <div class="tab-content" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                     <div class="row">
 
                         <?php foreach ($food as $product) : ?>
-                            <div class="col-lg-4 col-md-4 special-grid food-product">
+                            <div class="col-lg-4 col-md-6 special-grid drinks">
                                 <div class="card">
                                     <a href="<?= Url::to(['/food/view', 'id' => $product['id']]) ?>">
                                         <?= Html::img("@web/images/food/{$product['img']}", ['alt' => $product['name'], 'class' => 'card-img-top']) ?>
@@ -65,12 +65,10 @@ $this->title = 'Популярные товары';
                                 </div>
                             </div>
                         <?php endforeach; ?>
+
                     </div>
                 </div>
             </div>
-            <?= LinkPager::widget([
-                'pagination' => $pages,
-            ]); ?>
         </div>
     </div>
 </div>

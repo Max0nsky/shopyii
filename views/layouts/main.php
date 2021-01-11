@@ -58,9 +58,9 @@ AppAsset::register($this);
                         <a class="nav-link" href="#">Контакты</a>
                     </li>
                 </ul>
-                <form action="" class="d-flex">
-                    <input type="search" placeholder="Поиск" class="form-cntrol mr-2">
-                    <button class="btn btn-secondary">Найти</button>
+                <form class="d-flex" method="get">
+                    <input type="search" placeholder="Поиск" name="queryWord" class="form-cntrol mr-2">
+                    <button class="btn btn-secondary" formaction="<?= Url::to(['category/search']) ?>">Найти</button>
                 </form>
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="<?= Url::to('/admin') ?>">Вход</a></li>
@@ -68,7 +68,7 @@ AppAsset::register($this);
                         <li class="nav-item"><a class="nav-link" href="<?= Url::to(['/site/logout']) ?>"> <?= Yii::$app->user->identity['username'] ?> (Выход)</a></li>
                     <?php endif; ?>
                 </ul>
-                
+
                 <!-- <a class="nav-link login" href="#">[Войти]</a> -->
             </div>
         </div>

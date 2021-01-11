@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                       </svg>
                         ', $url, [
                             'title'        => 'delete',
-                            'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                            'data-confirm' => Yii::t('yii', 'Вы действительно хотите удалить данный элемент?'),
                             'data-method'  => 'post',
                         ]);
                     },
