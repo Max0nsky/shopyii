@@ -16,7 +16,6 @@ class CategoryController extends AppController
     public function actionIndex()
     {
         $categories = Category::find()->indexBy('id')->asArray()->all();
-
         $query = Food::find()->where(['popular' => 1])->indexBy('id');
         $pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6, 'forcePageParam' => false, 'pageSizeParam' => false]);
         $food = $query->offset($pages->offset)->limit($pages->limit)->asArray()->all();
@@ -29,9 +28,8 @@ class CategoryController extends AppController
     /**
      * Отображние страниц категорий товаров
      */
-    public function actionView()
+    public function actionView($id)
     {
-        $id = trim(Yii::$app->request->get('id'));
         $categories = Category::find()->indexBy('id')->all();
         $query = Food::find()->where(['id_category' => $id])->indexBy('id');
         $pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6, 'forcePageParam' => false, 'pageSizeParam' => false]);

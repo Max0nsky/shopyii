@@ -5,7 +5,16 @@ namespace app\models;
 use yii\db\ActiveRecord;
 
 /**
- * Модель конкретного товара из одной категории
+ * Модель конкретного товара "food" из одной категории
+ * 
+ * @property int $id
+ * @property int $id_category
+ * @property string $name
+ * @property int $price
+ * @property string $description
+ * @property string $img
+ * @property int $popular
+ * @property string $quantity
  */
 class Food extends ActiveRecord
 {

@@ -1,47 +1,27 @@
 <p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>
-    <h1 align="center">Yii 2 Basic Project Template</h1>
+    <h1 align="center">Учебный проект интернет-магазина с админкой</h1>
+    <br>
+    Шаблон: https://github.com/Max0nsky/bootstrap-template
     <br>
 </p>
 
-Yii 2 Basic Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-rapidly creating small projects.
-
-The template contains the basic features including user login/logout and a contact page.
-It includes all commonly used configurations that would allow you to focus on adding new
-features to your application.
-
-[![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Build Status](https://travis-ci.com/yiisoft/yii2-app-basic.svg?branch=master)](https://travis-ci.com/yiisoft/yii2-app-basic)
-
-DIRECTORY STRUCTURE
+ДАННЫЕ ДЛЯ ВХОДА В АДМИНКУ
 -------------------
 
-      assets/             contains assets definition
-      commands/           contains console commands (controllers)
-      config/             contains application configurations
-      controllers/        contains Web controller classes
-      mail/               contains view files for e-mails
-      models/             contains model classes
-      runtime/            contains files generated during runtime
-      tests/              contains various tests for the basic application
-      vendor/             contains dependent 3rd-party packages
-      views/              contains view files for the Web application
-      web/                contains the entry script and Web resources
+ login: admin
+ password: adminpass12345
 
-DUMP BASE
+
+ДАМП БАЗЫ
 -------------------
 -- phpMyAdmin SQL Dump
 -- version 4.9.5deb2
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Время создания: Янв 06 2021 г., 22:49
+-- Время создания: Янв 13 2021 г., 18:34
 -- Версия сервера: 8.0.22-0ubuntu0.20.04.3
--- Версия PHP: 7.4.3
+-- Версия PHP: 7.4.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -111,7 +91,7 @@ INSERT INTO `food` (`id`, `id_category`, `name`, `price`, `description`, `img`, 
 (11, 2, 'Острый Тори Унаги', 59, 'Угорь, курица, спайси. 1 шт.', 'sushunag.jpg', 0, 5),
 (12, 2, 'С креветкой', 69, 'Острые суши с креветкой и нори. 1 шт.', 'sushikrev.jpg', 0, 5),
 (13, 3, 'Темпурная Камчатка', 219, 'Окуню жар., лук зеленый, масаго, унаги. 8 шт.', 'rolltemp.jpg', 0, 5),
-(14, 3, 'С авокадо', 79, 'Ролл с нежным авокадо. 8 шт.', 'rollavokado.jpg', 1, 5),
+(14, 3, 'С авокадо', 79, 'Ролл с нежным авокадо. 8 шт.', 'rollavokado.jpg', 1, 4),
 (15, 3, 'Эби люкс', 119, 'Сыр, креветка, огурец. 8 шт.', 'rollaby.jpg', 0, 5),
 (16, 3, 'Запеченная Филадельфия', 349, 'Сыр, лосось, соус сырный, унаги соус, кунжут. 8 шт.', 'rollzapfil.jpg', 0, 5),
 (17, 3, 'Запеченный штурман', 199, 'Окунь жар., лук,томат, соус чесночный, унаги,кунжут. 8 шт.', 'rollzapshtur.jpg', 1, 5),
@@ -123,11 +103,11 @@ INSERT INTO `food` (`id`, `id_category`, `name`, `price`, `description`, `img`, 
 (23, 4, 'Большой запеченный', 799, 'Запеченный с окунем,\r\nзапеченный с мидиями,\r\nзапеченный с лососем,\r\n2 суши окунь,\r\n2 суши лосось,\r\n2 суши мидии.\r\nВес 900 гр. 30 шт.', 'setbolzap.jpg', 0, 5),
 (24, 4, 'Харумаки', 799, 'Запеченный с лососем терияки,\r\nсенсей,\r\nфиладельфия классическая,\r\nснек ролл,\r\nролл с лососем,\r\nролл сяке люкс. 48 шт.', 'sethar.jpg', 0, 5),
 (25, 4, 'Темпурный', 699, 'Темпурный лосось,\r\nтемпурная креветка,\r\nимбирный,\r\nтемпурные альпы. 32 шт.', 'settempur.jpg', 0, 5),
-(26, 4, 'Крайз', 699, 'Запеченный с лососем терияки,\r\nсенсей,\r\nсливочный лосось, •калифорния,\r\nаляска. 40 шт.', 'setkrayz.jpg', 1, 5),
+(26, 4, 'Крайз', 699, 'Запеченный с лососем терияки,\r\nсенсей,\r\nсливочный лосось, •калифорния,\r\nаляска. 40 шт.', 'setkrayz.jpg', 1, 4),
 (27, 4, 'Харакири', 1399, 'Калифорния,\r\nсливочный лосось,\r\nбонито,\r\nснек ролл,\r\nспарта,\r\nчикен,\r\nролл с огурцом,\r\nролл с лососем,\r\nролл с авокадо,\r\nсливочный огурец,\r\nсуши лосось,\r\nсуши угорь. 74 шт.', 'setharak.jpg', 0, 5),
 (28, 5, 'Кольца кальмара', 160, 'Аппетитные кольца кальмара. 180 гр.', 'zakkolca.jpg', 0, 5),
-(29, 5, 'Картофель фри', 80, 'Тот самый картофель фри. 150 гр.', 'zakkarfree.jpg', 0, 4),
-(30, 5, 'Картофель по-деревенски', 80, 'Один из лучших, картофель по-деревенски. 150 гр.', 'zakkarpoderev.jpg', 1, 4),
+(29, 5, 'Картофель фри', 80, 'Тот самый картофель фри. 150 гр.', 'zakkarfree.jpg', 0, 5),
+(30, 5, 'Картофель по-деревенски', 80, 'Один из лучших, картофель по-деревенски. 150 гр.', 'zakkarpoderev.jpg', 1, 5),
 (31, 5, 'Куриные наггетсы', 150, 'Свежайшие куриные наггетсы. 200 гр.', 'zakkurnag.jpg', 0, 5),
 (32, 5, 'Салат Чука', 110, '(Чука,ореховый соус, лимон)\r\nВес 110гр.', 'zaksalatchuk.jpg', 0, 5),
 (33, 5, 'Чука Унаги', 210, '(Чука,лимон,угорь,ореховый соус,кунжут)\r\nВес 130гр.', 'zakchukunagi.jpg', 0, 5);
@@ -157,12 +137,8 @@ CREATE TABLE `purchase` (
 --
 
 INSERT INTO `purchase` (`id`, `firstname`, `lastname`, `patronymic`, `final_sum`, `final_quantity`, `phone_number`, `address`, `persons`, `date`, `condition_order`) VALUES
-(1, 'Иванов', 'Иван', 'Иванович', 580, 2, 1234567890, 'Воронеж, ул Пушкина, д 50', 2, '2020-10-13', 'Выполнено'),
-(6, 'Николай', 'Иванов', 'Иванович', 79, 1, 123, 'йцу', 2, '2020-12-29', 'Выполнено'),
-(7, 'Иван', 'Иванов', 'Иванович', 5830, 11, 12345678, '555', 5, '2020-12-30', 'Выполнено'),
-(9, 'Иван', 'Иванов', 'Иванович', 400, 5, 123123123, 'test 1', 5, '2021-01-05', 'Выполнено'),
-(10, 'Николай', 'Иванов', 'Иванович', 80, 1, 444, 'asdasdasd', 3, '2021-01-05', 'Выполнено'),
-(14, 'Николай', 'Иванов', 'Петрович', 729, 2, 99999999999, 'Пушкина 10', 2, '2021-01-06', 'Ожидание');
+(16, 'Петр', 'Петров', 'Петрович', 778, 2, 8923748932, 'Петровская 33', 2, '2021-01-11', 'Выполнено'),
+(18, 'Иван', 'Иванов', 'Иванович', 690, 3, 89123456789, 'Ивановская 23', 3, '2021-01-13', 'Ожидание');
 
 -- --------------------------------------------------------
 
@@ -185,14 +161,10 @@ CREATE TABLE `purchase_item` (
 --
 
 INSERT INTO `purchase_item` (`id`, `purchase_id`, `food_id`, `name`, `price`, `quantity`, `sum`) VALUES
-(1, 1, 5, 'Нью-Йорк', 500, 1, 500),
-(2, 1, 29, 'Картофель фри', 80, 1, 80),
-(12, 6, 14, 'С авокадо', 79, 1, 79),
-(13, 7, 5, 'Нью-йорк', 530, 11, 5830),
-(16, 9, 30, 'Картофель по-деревенски', 80, 5, 400),
-(17, 10, 30, 'Картофель по-деревенски', 80, 1, 80),
-(21, 14, 5, 'Нью-йорк', 530, 1, 530),
-(22, 14, 17, 'Запеченный штурман', 199, 1, 199);
+(24, 16, 14, 'С авокадо', 79, 1, 79),
+(25, 16, 26, 'Крайз', 699, 1, 699),
+(27, 18, 5, 'Нью-йорк', 530, 1, 530),
+(28, 18, 29, 'Картофель фри', 80, 2, 160);
 
 -- --------------------------------------------------------
 
@@ -212,7 +184,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `authKey`) VALUES
-(1, 'admin', '$2y$13$SgWV2nUPfipEUSYNwGgmVOXTYTaeJkDly5WcvyC4j5NIjT5dF79ni', 'QkeqF_HCZVPgvoEkEkc_wrHc7uY_7qmj');
+(1, 'admin', '$2y$13$SgWV2nUPfipEUSYNwGgmVOXTYTaeJkDly5WcvyC4j5NIjT5dF79ni', '5EnWRQp9M-U8egT_WvuAXew4EcEi-ePX');
 
 --
 -- Индексы сохранённых таблиц
@@ -271,13 +243,13 @@ ALTER TABLE `food`
 -- AUTO_INCREMENT для таблицы `purchase`
 --
 ALTER TABLE `purchase`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT для таблицы `purchase_item`
 --
 ALTER TABLE `purchase_item`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT для таблицы `user`
@@ -306,6 +278,21 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+DIRECTORY STRUCTURE
+-------------------
+
+      assets/             contains assets definition
+      commands/           contains console commands (controllers)
+      config/             contains application configurations
+      controllers/        contains Web controller classes
+      mail/               contains view files for e-mails
+      models/             contains model classes
+      runtime/            contains files generated during runtime
+      tests/              contains various tests for the basic application
+      vendor/             contains dependent 3rd-party packages
+      views/              contains view files for the Web application
+      web/                contains the entry script and Web resources
 
 ### Install via Composer
 

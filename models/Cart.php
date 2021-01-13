@@ -14,14 +14,21 @@ class Cart extends ActiveRecord
         // Если товар существует - добавляем его количество.
         // Иначе - формируем массив для товара и добавляем в сессию.
         if (isset($_SESSION['cart'][$food->id])) {
-            $_SESSION['cart'][$food->id]['quantity'] += $quantity;
-        } else {
+            if ($_SESSION['cart'][$food->id]['quantity'] + $quantity  <= $food->quantity) {
+                $_SESSION['cart'][$food->id]['quantity'] += $quantity;
+            } else {
+                echo "<script>alert(\"Извините, на складе осталось только $food->quantity шт\");</script>";
+                return false;
+            }
+        } elseif ($quantity <= $food->quantity) {
             $_SESSION['cart'][$food->id] = [
                 'quantity' => $quantity,
                 'name' => $food->name,
                 'price' => $food->price,
                 'img' => $food->img
             ];
+        } else {
+            return false;
         }
 
         // Добавляем общее количество всех видов товара

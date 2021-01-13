@@ -3,8 +3,7 @@
 namespace app\controllers;
 
 use app\models\Food;
-use app\models\Cart;
-use GuzzleHttp\Psr7\Request;
+use app\models\Cart;   
 use Yii;
 use app\models\PurchaseItem;
 use app\models\Purchase;
@@ -14,28 +13,14 @@ class CartController extends AppController
     /**
      * Получение id товара и добавление в корзину
      */
-    public function actionAdd()
+    public function actionAdd($id, $quantity = 1)
     {
-        $id = Yii::$app->request->get('id');
-        $quantity = (int)Yii::$app->request->get('quantity');
-        $quantity = !$quantity ? 1 : $quantity;
+        if($quantity < 1) {
+            return $this->redirect(Yii::$app->request->referrer);
+        }
         $food = Food::findOne($id);
         if (empty($food)) {
             return false;
-        }
-        if($quantity > $food->quantity) {
-            // Исправить логику
-            echo "<script>alert(\"Извините, у нас нет необходимого количества данного товара :( \");</script>";
-            $quantity = 0; 
-            return $this->redirect(Yii::$app->request->referrer);
-        }
-        elseif(isset($_SESSION['cart'][$food->id]['quantity']))
-        {
-            if (($quantity + $_SESSION['cart'][$food->id]['quantity']) > $food->quantity)
-            {
-                echo "<script>alert(\"Извините, у нас нет необходимого количества данного товара :( \");</script>";
-                $quantity = 0; 
-            }
         }
         $session = Yii::$app->session;
         $session->open();

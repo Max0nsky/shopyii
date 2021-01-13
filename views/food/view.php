@@ -20,7 +20,7 @@ $this->title = $food['name'];
                 <h2><?= $food->name ?></h2>
                 <b>Цена: </b><?= $food->price; ?>p
                 <p><b>Описание: </b><?= $food->description ?></p>
-                <p><b>Колиичество: </b><input type="text" value="1" id="quantity" /></p>
+                <p><b>Колиичество: </b><input type="number" min="1" max="99999" value="1" id="quantity" /></p>
                 <div class="crt">
                     <a href="<?= Url::to(['/cart/add', 'id' => $food->id]) ?>" data-id="<?= $food->id ?>" class="btn btn-default add-to-cart btn-secondary">Добавить в корзину</a>
                 </div>

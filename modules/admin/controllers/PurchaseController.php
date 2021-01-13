@@ -24,7 +24,8 @@ class PurchaseController extends Controller
         return $this->render('index', ['purchases' => $purchases]);
     }
     /**
-     * Выполнить заказ по переданному id
+     * Выполнить заказ по переданному $purchase_id
+     *  @param integer $purchase_id
      */
     public function actionExecute($purchase_id)
     {
@@ -33,7 +34,8 @@ class PurchaseController extends Controller
     }
 
     /**
-     * Удалить заказ по переданному id
+     * Удалить заказ по переданному $purchase_id
+     * @param integer $purchase_id
      */
     public function actionDelete($purchase_id)
     {

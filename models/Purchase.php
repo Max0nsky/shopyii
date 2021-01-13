@@ -4,11 +4,10 @@ namespace app\models;
 
 use yii\db\ActiveRecord;
 use Yii;
-use yii\behaviors\TimestampBehavior;
 use app\models\PurchaseItem;
 
 /**
- * This is the model class for table "purchase".
+ * Модель для таблицы заказов "purchase".
  *
  * @property int $id
  * @property string $firstname

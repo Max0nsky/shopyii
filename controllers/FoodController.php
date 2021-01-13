@@ -8,6 +8,9 @@ use Yii;
 
 class FoodController extends AppController
 {
+    /**
+     * Отображение карточки отдельного товара
+     */
     public function actionView($id)
     {
         $id = trim(Yii::$app->request->get('id'));

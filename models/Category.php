@@ -5,7 +5,10 @@ namespace app\models;
 use yii\db\ActiveRecord;
 
 /**
- * Модель категории товаров
+ * Модель для таблицы категорий товаров "purchase".
+ *
+ * @property int $id
+ * @property string $name
  */
 class Category extends ActiveRecord
 {
@@ -15,6 +18,3 @@ class Category extends ActiveRecord
     }
 
 }
-
-//$this->data = Category::find()->indexBy('id')->asArray()->all();
-
