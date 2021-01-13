@@ -8,8 +8,8 @@
 ДАННЫЕ ДЛЯ ВХОДА В АДМИНКУ
 -------------------
 
- login: admin
- password: adminpass12345
+ login: admin<br>
+ password: adminpass12345<br>
 
 
 ДАМП БАЗЫ
