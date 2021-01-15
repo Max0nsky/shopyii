@@ -18,10 +18,10 @@
 -- version 4.9.5deb2
 -- https://www.phpmyadmin.net/
 --
--- Хост: localhost:3306
--- Время создания: Янв 13 2021 г., 18:34
+-- Хост: localhost
+-- Время создания: Янв 15 2021 г., 20:15
 -- Версия сервера: 8.0.22-0ubuntu0.20.04.3
--- Версия PHP: 7.4.13
+-- Версия PHP: 7.4.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -169,6 +169,30 @@ INSERT INTO `purchase_item` (`id`, `purchase_id`, `food_id`, `name`, `price`, `q
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `review`
+--
+
+CREATE TABLE `review` (
+  `id` int NOT NULL,
+  `id_food` int NOT NULL,
+  `mail` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `text` text NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `review`
+--
+
+INSERT INTO `review` (`id`, `id_food`, `mail`, `name`, `text`, `date`) VALUES
+(2, 14, 'niko1234@mail.ru', 'Николай', 'Замечательный вкус и неплохая комплектация. Всем советую это попробовать.', '2021-01-14 12:24:29'),
+(7, 5, 'nikol@mail.ru', 'Николай', 'Хорошая пицца, много начинки. Было вкусно.', '2021-01-15 17:13:15'),
+(8, 5, 'ivan@mail.ru', 'Иван', 'Тесто сухое', '2021-01-15 17:14:16');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `user`
 --
 
@@ -184,7 +208,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `authKey`) VALUES
-(1, 'admin', '$2y$13$SgWV2nUPfipEUSYNwGgmVOXTYTaeJkDly5WcvyC4j5NIjT5dF79ni', '5EnWRQp9M-U8egT_WvuAXew4EcEi-ePX');
+(1, 'admin', '$2y$13$SgWV2nUPfipEUSYNwGgmVOXTYTaeJkDly5WcvyC4j5NIjT5dF79ni', '5P8OF7o2gukfVM7PD4jRPaEHh63Rgq9W');
 
 --
 -- Индексы сохранённых таблиц
@@ -216,6 +240,13 @@ ALTER TABLE `purchase_item`
   ADD PRIMARY KEY (`id`),
   ADD KEY `purchase_id` (`purchase_id`),
   ADD KEY `food_id` (`food_id`);
+
+--
+-- Индексы таблицы `review`
+--
+ALTER TABLE `review`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_food` (`id_food`);
 
 --
 -- Индексы таблицы `user`
@@ -252,6 +283,12 @@ ALTER TABLE `purchase_item`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
+-- AUTO_INCREMENT для таблицы `review`
+--
+ALTER TABLE `review`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
@@ -273,6 +310,12 @@ ALTER TABLE `food`
 ALTER TABLE `purchase_item`
   ADD CONSTRAINT `purchase_item_ibfk_1` FOREIGN KEY (`purchase_id`) REFERENCES `purchase` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `purchase_item_ibfk_2` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `review`
+--
+ALTER TABLE `review`
+  ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`id_food`) REFERENCES `food` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

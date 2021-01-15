@@ -46,3 +46,7 @@
     .image-view {
         height: 220px;
     }
+    
+    .delete-review {
+        color: red;
+    }

@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Url;
-use yii\bootstrap\Html;
+use yii\bootstrap4\Html;
+use yii\bootstrap4\ActiveForm;
 /* @var $this yii\web\View */
 
 $this->title = $food['name'];
@@ -29,4 +30,41 @@ $this->title = $food['name'];
         </div>
     </div>
     <!--/food-details-->
+    <div class="container">
+        <div class="row">
+            <div class="reviews col-sm-6 ">
+                <p>
+                <h4> Написать отзыв:</h4>
+                </p>
+                <?php $form = ActiveForm::begin(); ?>
+                <?= $form->field($modelReview, 'name')->textInput() ?>
+                <?= $form->field($modelReview, 'mail')->input('email')->hint('Вида: example@mail.ru'); ?>
+                <?= $form->field($modelReview, 'text')->textarea(['rows' => 2, 'cols' => 5]) ?>
+                <div class="form-group">
+                    <?= Html::submitButton('Отправить', ['class' => 'btn btn-secondary']) ?>
+                </div>
+                <?php ActiveForm::end(); ?>
+            </div>
+            <div class="reviews col-sm-6 ">
+                <p>
+                <h4> Отзывы и пожелания:</h4>
+                </p>
+                <?php foreach ($reviews as $review) : ?>
+                    <div class="review">
+                        <p>
+                            <b><?= $review->name ?> (<?= $review->mail ?>)</b>
+                            <?php if (!empty(Yii::$app->user->identity['username'])) : ?>
+                                <?php if (Yii::$app->user->identity['username'] == 'admin') : ?>
+                                    <a href="<?= Url::to(['/admin/review/delete', 'id' => $review->id]) ?>" class="delete-review">[Удалить]</a>
+                                <?php endif; ?>
+                            <?php endif; ?><br>
+                            <?= $review->text ?> <br>
+                            <?= $review->date ?>
+                        </p>
+                    </div>
+                <?php endforeach; ?>
+                <?php if (empty($reviews)) echo "Отзывы для данного продукта отсутствуют." ?>
+            </div>
+        </div>
+    </div>
 </div><br>
