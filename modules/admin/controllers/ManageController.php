@@ -3,17 +3,18 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\UploadedFile;
 use app\models\Food;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
+use app\modules\admin\controllers\AppAdminController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * ManageController реализует действия CRUD для модели Food.
  */
-class ManageController extends Controller
+class ManageController extends AppAdminController
 {
     /**
      * {@inheritdoc}
@@ -21,6 +22,15 @@ class ManageController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

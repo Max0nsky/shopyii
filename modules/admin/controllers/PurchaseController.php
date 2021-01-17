@@ -7,12 +7,12 @@ use Yii;
 use app\models\Purchase;
 use app\models\PurchaseItem;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
+use app\modules\admin\controllers\AppAdminController;
 
 /**
  * PurchaseController реализует обработку пользовательских заказов.
  */
-class PurchaseController extends Controller
+class PurchaseController extends AppAdminController
 {
     /**
      * Список всех заказов.

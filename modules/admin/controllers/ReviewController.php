@@ -10,7 +10,7 @@ use yii\web\Controller;
 /**
  * ReviewController реализует обработку отзывов на стороне администратора.
  */
-class ReviewController extends Controller
+class ReviewController extends AppAdminController
 {
     /**
      * Удалить заказ по переданному $id
